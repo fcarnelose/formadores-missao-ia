@@ -7,14 +7,71 @@ const textoResultado = document.querySelector(".texto-resultado");
 const perguntas = [
     {
         enunciado: " A propagação de fake news sobre energias renováveis pode ter impactos significativos. Quais são as principais consequências ambientais e econômicas dessas informações falsas?",
-        alternativas: ["A disseminação de fake news pode levar à desconfiança pública e à redução de investimentos em tecnologias sustentáveis.","A disseminação de fake news pode aumentar o investimento em tecnologias não sustentáveis, como combustíveis fósseis."]
+        alternativas: [
+            {
+                texto:"A- A disseminação de fake news pode levar à desconfiança pública e à redução de investimentos em tecnologias sustentáveis.",
+                afirmacao: "Conhece Fakenews e sabe onde verificar as fontes das notícias."
+            },
+            {
+                texto:"B- A disseminação de fake news pode aumentar o investimento em tecnologias não sustentáveis, como combustíveis fósseis.",
+                afirmacao:"Desconhece o que é fakenews e precisa estudar mais"
+
+            }
+        ]
     },
     {
         enunciado: "As fake news vêm disseminando informações que não condizem com a realidade e isso tem impactado todos os setores da economia. Quando pensamos em energia sustentável é necessário elencar que a preservação das florestas não são apenas dados quantitativos, mas qualitativos, porque tem como impacto os desastres ambientais que têm surgido em nosso contexto mundial. Pensando nisso, como combater as fake news relativo à produção de energia sustentável e qual o impacto disso no cotidiano da prevenção dos desastres ambientais?",
-        alternativas: ["Expôr mais informações sobre o tema de Produção de Energias Sustentáveis a fim de informar a sociedade e blindá-la contra as fake news dos desastres ambientais.","Não pesquisar sobre a veracidade das informações que vêm pelos portais de comunicação. Confiando cegamente nas notícias. "]
+        alternativas: [
+            {
+                texto:"A-Expôr mais informações sobre o tema de Produção de Energias Sustentáveis a fim de informar a sociedade e blindá-la contra as fake news dos desastres ambientais.",
+                afirmacao:"Parabéns! você é um cidadão consciente e deseja estar atento com a realidade do mundo em que está inserido. "
+            },
+            {   
+                texto:"B-Não pesquisar sobre a veracidade das informações que vêm pelos portais de comunicação. Confiando cegamente nas notícias. ",
+                afirmacao:"Ops! Talvez essa não seja a melhor alternativa."
+            }
+        ]
     },
     {
         enunciado: "Desastres ambientais são eventos que acontecem no meio natural e que apresentam consequências negativas para os ecossistemas e para os seres humanos. Há um incentivo na produção de energias sustentáveis, mas esse incentivo não ajuda em nada na diminuição dos desastres ambientais. O que você  opina sobre assunto?",
-        alternativas: ["Verdade","Mentira"]
+        alternativas: [
+            {
+                texto:"A-Verdade",
+                afirmacao:"As diferentes formas de produção de energias sustentáveis é mais uma forma de ganhar dinheiro a partir de recursos naturais"
+            },
+             {
+                texto:"B-Mentira",
+                afirmacao:"Por exemplo, a energia solar contribui para a redução do impacto ambiental, sendo uma fonte limpa e renovável"
+            }
+        ]
     }
 ]
+
+let atual = 0;
+let perguntaAtual;
+let historiafinal = ""; //editado aula 8
+
+function mostraPergunta(){
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+// editado aula 8
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas)
+    }
+}
+// criado nova função aula 8
+function respostaSelecionada(opcaoSelecionada){
+    const afirmacao = opcaoSelecionada.afirmacao;
+    historiafinal = afirmacao;
+    atual++;
+    mostraPergunta();
+}
+
+mostraPergunta();
