@@ -49,29 +49,40 @@ const perguntas = [
 
 let atual = 0;
 let perguntaAtual;
-let historiafinal = ""; //editado aula 8
-
-function mostraPergunta(){
+let historiaFinal = "";
+// aula 9
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
+    textoResultado.textContent = "";
     mostraAlternativas();
 }
-// editado aula 8
+
 function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
+    for(const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-        caixaAlternativas.appendChild(botaoAlternativas)
+        caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
-// criado nova função aula 8
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacao = opcaoSelecionada.afirmacao;
-    historiafinal = afirmacao;
+// aula 9
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
     atual++;
     mostraPergunta();
+}
+// aula 9
+function mostraResultado() {
+    caixaPerguntas.textContent = "texto sobre as perguntas";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
 }
 
 mostraPergunta();
